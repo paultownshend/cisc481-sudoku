@@ -5,6 +5,33 @@
     <title>Solving Sudoku with AC-3 and Backtracking</title>
 </head>
 <body>
+    <h1>Sudoku Solver</h1>
 
+    <div>
+        <button id="p1" onclick="printSudoku(1)">Puzzle 1</button>
+        <button id="p2" onclick="printSudoku(2)">Puzzle 2</button>
+        <button id="p3" onclick="printSudoku(3)">Puzzle 3</button>
+        <button id="p4" onclick="printSudoku(4)">Puzzle 4</button>
+        <button id="p5" onclick="printSudoku(5)">Puzzle 5</button>
+    </div>
+    <pre id="sudoku"></pre>
+
+
+    <script>
+        function printSudoku(n) {
+            let path = './output' + n + '.txt'
+            populatePre(path)
+        }
+
+        function populatePre(url) {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                document.getElementById('sudoku').textContent = this.responseText;
+            };
+            xhr.open('GET', url);
+            xhr.send();
+        }
+
+    </script>
 </body>
 </html>

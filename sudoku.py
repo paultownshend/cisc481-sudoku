@@ -128,11 +128,13 @@ class Sudoku:
         assignment[var] = val
         self.pruned[var] = self.domains[var]
         self.domains[var] = [val]
+        self.pruned[var].remove(val)
 
     def unassign(self, var, assignment):
-        if var in assignment.keys():
-            self.domains[var].append(self.pruned[var])
-            self.pruned.pop(var)
+        if var in assignment.keys() and var in self.pruned:
+            for i in range(len(self.pruned[var])):
+                self.domains[var].append(self.pruned[var][i])
+            self.pruned[var] = []
             del assignment[var]
 
     def print_board(self):
